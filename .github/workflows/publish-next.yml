@@ -13,12 +13,12 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
-      - run: git fetch origin master
+      - run: git fetch origin main
       - uses: actions/setup-node@v1
         with:
           node-version: 12.x 
       - run: yarn
-      - run: echo "::set-output name=result::$(yarn affected:libs --plain --base=origin/master~1)"
+      - run: echo "::set-output name=result::$(yarn affected:libs --plain --base=origin/main~1)"
         id: affected_libs
       - run: echo ${steps.affected_libs.outputs.result}
 
