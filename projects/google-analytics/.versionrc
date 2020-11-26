@@ -1,0 +1,5 @@
+{
+  "path": ".",
+  "tag-prefix": "google-analytics-v",
+  "releaseCommitMessageFormat": "chore(release): google-analytics@{{currentTag}}"
+}

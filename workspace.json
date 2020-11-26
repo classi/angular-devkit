@@ -32,6 +32,19 @@
             "jestConfig": "projects/google-analytics/jest.config.js",
             "passWithNoTests": true
           }
+        },
+        "release": {
+          "builder": "@nrwl/workspace:run-commands",
+          "outputs": ["build/google-analytics"],
+          "options": {
+            "commands": [
+              {
+                "command": "npx standard-version --dry-run"
+              }
+            ],
+            "cwd": "projects/google-analytics",
+            "parallels": false
+          }
         }
       },
       "schematics": {
