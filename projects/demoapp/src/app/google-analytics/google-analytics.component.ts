@@ -17,7 +17,7 @@ export class GoogleAnalyticsComponent implements OnInit {
     });
   }
 
-  sendCustomEvent() {
+  sendCustomEvent(): void {
     this.analytics.captureCustomEvent({
       category: 'test',
       action: 'click',
