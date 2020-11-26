@@ -6,6 +6,11 @@ import { EventTracking } from './tracking/event-tracking';
 import { PageTracking } from './tracking/page-tracking';
 import { UserTimingTracking } from './tracking/user-timing-tracking';
 
+export function createAdapter(): GoogleAnalyticsAdapter {
+  const gaInstance = typeof window['ga'] !== 'undefined' ? ga : null;
+  return new GoogleAnalyticsAdapter(gaInstance);
+}
+
 @NgModule({})
 export class GoogleAnalyticsModule {
   static forRoot(
@@ -20,10 +25,7 @@ export class GoogleAnalyticsModule {
         },
         {
           provide: GoogleAnalyticsAdapter,
-          useFactory: () => {
-            const gaInstance = typeof window['ga'] !== 'undefined' ? ga : null;
-            return new GoogleAnalyticsAdapter(gaInstance);
-          },
+          useFactory: createAdapter,
         },
         PageTracking,
         EventTracking,
