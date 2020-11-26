@@ -20,5 +20,7 @@ jobs:
       - run: yarn
       - run: echo "::set-output name=result::$(yarn affected:libs --plain --base=origin/main~1)"
         id: affected_libs
-      - run: echo ${steps.affected_libs.outputs.result}
+      - run: echo $AFFECTED_LIBS
+        env:
+          AFFECTED_LIBS: ${{steps.affected_libs.outputs.result}}
 
