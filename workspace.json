@@ -35,7 +35,7 @@
         },
         "release": {
           "builder": "@nrwl/workspace:run-commands",
-          "outputs": ["build/google-analytics"],
+          "outputs": ["projects/google-analytics/CHANGELOG.md"],
           "options": {
             "commands": [
               {

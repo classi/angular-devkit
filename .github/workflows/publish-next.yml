@@ -3,24 +3,20 @@ name: publish (next)
 on:
   push:
     branches:
-      # - main
-      - publish-next-on-master-commits
+      - main
 
 jobs:
   publish-next:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-      - run: git fetch origin main
       - uses: actions/setup-node@v1
         with:
           node-version: 12.x 
       - run: yarn
-      - run: echo "::set-output name=result::$(yarn affected:libs --plain --base=origin/main~1)"
-        id: affected_libs
-      - run: echo $AFFECTED_LIBS
+      - run: yarn build:libs
+      - run: ./tools/scripts/publish-next.sh ${GITHUB_SHA}
         env:
-          AFFECTED_LIBS: ${{steps.affected_libs.outputs.result}}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
+      
 

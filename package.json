@@ -17,6 +17,7 @@
     "affected:lint": "nx affected:lint",
     "affected:dep-graph": "nx affected:dep-graph",
     "affected": "nx affected",
+    "build:libs": "nx run-many --projects=google-analytics --target=build --with-deps --prod",
     "format": "nx format:write",
     "format:write": "nx format:write",
     "format:check": "nx format:check",
