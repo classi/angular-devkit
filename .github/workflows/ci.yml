@@ -1,0 +1,50 @@
+name: CI
+
+on:
+  - pull_request
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - run: git fetch origin main
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12.x 
+      - run: yarn
+      - run: yarn affected:build --base=remotes/origin/main
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+      - run: yarn
+      - run: yarn affected:test --base=remotes/origin/main
+      - run: yarn affected:lint --base=remotes/origin/main
+
+  demoapp-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+      - run: yarn
+      - run: yarn build demoapp --prod
+  demoapp-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+      - run: yarn
+      - run: yarn test demoapp
+      - run: yarn lint demoapp
