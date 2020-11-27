@@ -18,7 +18,8 @@ jobs:
         run: | 
           echo "::set-output name=validBranch::$(git branch --contains HEAD --format "%(refname:lstrip=2)" | grep -e 'main' -e 'action-on-release-tag')\n"
           echo "::set-output name=tag::${GITHUB_REF/refs\/tags\//}\n"
-      - run: echo ${{steps.vars.outputs.*}}
+      - run: echo "valid branch = ${{steps.vars.outputs.validBranch}}"
+      - run: echo "target tag = ${{steps.vars.outputs.tag}}"
       - uses: actions/setup-node@v1
         with:
           node-version: 12.x
