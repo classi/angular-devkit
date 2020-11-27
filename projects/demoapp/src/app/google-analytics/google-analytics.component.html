@@ -1,3 +1,14 @@
 <h2>google-analytics examples</h2>
 
 <button (click)="sendCustomEvent()">send custom event</button>
+
+<button
+  [clAnalyticsOn]="'click'"
+  [analyticsEvent]="{
+    category: 'demoapp',
+    action: 'click',
+    label: 'by directive'
+  }"
+>
+  send event by directive
+</button>
