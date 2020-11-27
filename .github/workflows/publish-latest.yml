@@ -13,9 +13,9 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
-
-      - run: echo $(git branch --contains HEAD --format "%(refname:lstrip=2)")
-      - run: echo "::set-output name=result::$(git branch --contains HEAD --format "%(refname:lstrip=2)" | egrep "action-on-release-tag")"
+      - name: Reattach to branch
+      - run: echo $(git branch --contains ${GITHUB_SHA} --format "%(refname:lstrip=2)")
+      - run: echo "::set-output name=result::$(git branch --contains ${GITHUB_SHA} --format "%(refname:lstrip=2)" | egrep "action-on-release-tag")"
         id: validBranch
       - run: echo "::set-output name=result::${GITHUB_REF/refs\/tags\//}"
         id: targetTag
