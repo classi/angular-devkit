@@ -1,0 +1,26 @@
+name: publish (latest)
+
+on:
+  push:
+    branches:
+      - '*' # TODO: restrict to only main after experiment
+
+jobs:
+  publish-latest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: get tags
+        id: getTags
+        run: echo ::set-output name=result::echo $(git tag --points-at HEAD | sed -e 's/v[0-9]\.[0-9]\.[0-9]$/VERSION/g')
+      - run: echo ${{steps.tagName.outputs.result}}
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+      - run: yarn
+      - name: google-analytics
+        if: ${{ contains(steps.getTags.outputs.result, 'google-analytics-VERSION') }}
+        run: yarn build google-analytics --prod
+      - name: test
+        if: ${{ contains(steps.getTags.outputs.result, 'test-VERSION') }}
+        run: echo 'test'
