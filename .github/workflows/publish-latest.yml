@@ -14,7 +14,7 @@ jobs:
         with:
           fetch-depth: 0
       - run: echo $(git branch -r --contains ${GITHUB_SHA} --format "%(refname:lstrip=2)")
-      - run: echo "::set-output name=result::$(git branch -a --contains ${GITHUB_SHA} --format "%(refname:lstrip=2)" | egrep "action-on-release-tag")"
+      - run: echo "::set-output name=result::$(git branch -r --contains ${GITHUB_SHA} --format "%(refname:lstrip=2)" | egrep "main")"
         id: validBranch
       - run: echo "::set-output name=result::${GITHUB_REF/refs\/tags\//}"
         id: targetTag
