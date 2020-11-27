@@ -10,6 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
       - name: get tags
         id: getTags
         run: echo ::set-output name=result::$(git tag --points-at HEAD | sed -e 's/v[0-9]\.[0-9]\.[0-9]$/VERSION/g')
