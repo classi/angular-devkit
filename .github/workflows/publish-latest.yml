@@ -18,7 +18,7 @@ jobs:
         id: validBranch
       - run: echo "::set-output name=result::${GITHUB_REF/refs\/tags\//}"
         id: targetTag
-      - run: echo "validBranch:${{steps.validBranch.outputs.result}}"
+      - run: echo "validBranch:${{steps.validBranch.outputs.result==true}}"
       - run: echo "targetTag:${{steps.targetTag.outputs.result}}"
       # == endregion
       - uses: actions/setup-node@v1
