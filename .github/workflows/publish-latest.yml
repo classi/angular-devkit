@@ -13,21 +13,21 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
-      - run: echo $(git branch -r --contains ${GITHUB_SHA} --format "%(refname:lstrip=2)")
+      # == region variables
       - run: echo "::set-output name=result::$(git branch -r --contains ${GITHUB_SHA} --format "%(refname:lstrip=2)" | egrep "main")"
         id: validBranch
       - run: echo "::set-output name=result::${GITHUB_REF/refs\/tags\//}"
         id: targetTag
-        
-      - run: echo "valid branch = [${{steps.validBranch.outputs.result}}]"
-      - run: echo "target tag = [${{steps.targetTag.outputs.result}}]"
+      - run: echo "validBranch:${{steps.validBranch.outputs.result}}"
+      - run: echo "targetTag:${{steps.targetTag.outputs.result}}"
+      # == endregion
       - uses: actions/setup-node@v1
         with:
           node-version: 12.x
       - run: yarn
       - name: google-analytics
-        if: ${{ startsWith(steps.targetTag.outputs.result, 'google-analytics-v') }}
+        if: ${{ steps.validBranch.outputs.result != "" && startsWith(steps.targetTag.outputs.result, 'google-analytics-v') }}
         run: yarn build google-analytics --prod
       - name: test
-        if: ${{ startsWith(steps.targetTag.outputs.result, 'test-v') }}
+        if: ${{ steps.validBranch.outputs.result != "" && startsWith(steps.targetTag.outputs.result, 'test-v') }}
         run: echo 'test'
