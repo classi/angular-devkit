@@ -13,20 +13,21 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
-      - name: prepare vars
-        id: vars
-        run: | 
-          echo "::set-output name=validBranch::$(git branch --contains HEAD --format "%(refname:lstrip=2)" | grep -e 'main' -e 'action-on-release-tag')\n"
-          echo "::set-output name=tag::${GITHUB_REF/refs\/tags\//}\n"
-      - run: echo "valid branch = ${{steps.vars.outputs.validBranch}}"
-      - run: echo "target tag = ${{steps.vars.outputs.tag}}"
+
+      - run: echo "::set-output name=result::$(git branch --contains HEAD --format "%(refname:lstrip=2)" | grep -e 'main' -e 'action-on-release-tag')"
+        id: validBranch
+      - run: echo "::set-output name=result::${GITHUB_REF/refs\/tags\//}"
+        id: targetTag
+        
+      - run: echo "valid branch = [${{steps.validBranch.outputs.result}}]"
+      - run: echo "target tag = [${{steps.targetTag.outputs.result}}]"
       - uses: actions/setup-node@v1
         with:
           node-version: 12.x
       - run: yarn
       - name: google-analytics
-        if: ${{ startsWith(steps.vars.outputs.tag, 'google-analytics-v') }}
+        if: ${{ startsWith(steps.targetTag.outputs.result, 'google-analytics-v') }}
         run: yarn build google-analytics --prod
       - name: test
-        if: ${{ startsWith(steps.vars.outputs.tag, 'test-v') }}
+        if: ${{ startsWith(steps.targetTag.outputs.result, 'test-v') }}
         run: echo 'test'
