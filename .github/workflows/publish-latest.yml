@@ -14,7 +14,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - run: echo "::set-output name=result::$(git branch --contains HEAD --format "%(refname:lstrip=2)" | egrep "main|action-on-release-tag")"
+      - run: echo "::set-output name=result::$(git branch --contains HEAD --format "%(refname:lstrip=2)" | egrep "action-on-release-tag")"
         id: validBranch
       - run: echo "::set-output name=result::${GITHUB_REF/refs\/tags\//}"
         id: targetTag
