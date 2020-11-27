@@ -11,8 +11,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
       # == region variables
       - run: echo "::set-output name=result::$(git branch -r --contains ${GITHUB_SHA} --format "%(refname:lstrip=2)" | egrep "main")"
         id: validBranch
