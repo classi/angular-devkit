@@ -11,7 +11,8 @@
           "builder": "@nrwl/angular:package",
           "options": {
             "tsConfig": "projects/google-analytics/tsconfig.lib.json",
-            "project": "projects/google-analytics/ng-package.json"
+            "project": "projects/google-analytics/ng-package.json",
+            "updateBuildableProjectDepsInPackageJson": false
           },
           "configurations": {
             "production": {
@@ -28,8 +29,7 @@
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "projects/google-analytics/jest.config.js",
-            "passWithNoTests": true
+            "jestConfig": "projects/google-analytics/jest.config.js"
           }
         },
         "release": {
