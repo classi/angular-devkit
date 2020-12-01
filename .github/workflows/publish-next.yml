@@ -15,7 +15,7 @@ jobs:
           node-version: 12.x 
       - run: yarn
       - run: yarn build:libs
-      - run: ./tools/scripts/publish-next.sh ${GITHUB_SHA}
+      - run: ./tools/scripts/publish-next-all.sh ${GITHUB_SHA}
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
       

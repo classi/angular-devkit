@@ -25,8 +25,7 @@ jobs:
       - run: yarn
       - name: google-analytics
         if: ${{ steps.validBranch.outputs.result == true && startsWith(steps.targetTag.outputs.result, 'google-analytics-v') }}
-        # TODO: do publishing
-        run: yarn build google-analytics --prod
+        run: ./tools/scripts/publish-latest.sh "google-analytics"
       - name: test
         if: ${{ steps.validBranch.outputs.result == true && startsWith(steps.targetTag.outputs.result, 'test-v') }}
         run: echo 'test'
