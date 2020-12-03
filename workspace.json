@@ -141,6 +141,57 @@
           }
         }
       }
+    },
+    "ngrx-extensions": {
+      "projectType": "library",
+      "root": "projects/ngrx-extensions",
+      "sourceRoot": "projects/ngrx-extensions/src",
+      "prefix": "cl",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/angular:package",
+          "options": {
+            "tsConfig": "projects/ngrx-extensions/tsconfig.lib.json",
+            "project": "projects/ngrx-extensions/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ngrx-extensions/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["projects/ngrx-extensions/src/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "projects/ngrx-extensions/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "release": {
+          "builder": "@nrwl/workspace:run-commands",
+          "outputs": ["projects/ngrx-extensions/CHANGELOG.md"],
+          "options": {
+            "commands": [
+              {
+                "command": "npx standard-version"
+              }
+            ],
+            "cwd": "projects/ngrx-extensions",
+            "parallels": false
+          }
+        }
+      },
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      }
     }
   },
   "cli": {

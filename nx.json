@@ -22,11 +22,14 @@
     }
   },
   "projects": {
-    "google-analytics": {
-      "tags": ["util"]
-    },
     "demoapp": {
       "tags": ["app"]
+    },
+    "google-analytics": {
+      "tags": ["lib"]
+    },
+    "ngrx-extensions": {
+      "tags": ["lib"]
     }
   },
   "workspaceLayout": {

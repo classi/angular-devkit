@@ -1,0 +1,5 @@
+{
+  "path": ".",
+  "tag-prefix": "ngrx-extensions-v",
+  "releaseCommitMessageFormat": "chore(release): ngrx-extensions@{{currentTag}}"
+}

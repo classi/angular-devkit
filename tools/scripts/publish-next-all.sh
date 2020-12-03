@@ -1,6 +1,6 @@
 #!/bin/bash -eux
 
-projects=("google-analytics")
+projects=("google-analytics", "ngrx-extensions")
 previewVersion=0.0.0-$1
 
 echo $previewVersion
