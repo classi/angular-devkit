@@ -17,7 +17,7 @@
     "affected:lint": "nx affected:lint",
     "affected:dep-graph": "nx affected:dep-graph",
     "affected": "nx affected",
-    "build:libs": "nx run-many --projects=google-analytics --target=build --with-deps --prod",
+    "build:libs": "nx run-many --projects=google-analytics,ngrx-extensions --target=build --with-deps --prod",
     "can-npm-publish": "can-npm-publish",
     "format": "nx format:write",
     "format:write": "nx format:write",
