@@ -152,7 +152,8 @@
           "builder": "@nrwl/angular:package",
           "options": {
             "tsConfig": "projects/ngrx-extensions/tsconfig.lib.json",
-            "project": "projects/ngrx-extensions/ng-package.json"
+            "project": "projects/ngrx-extensions/ng-package.json",
+            "updateBuildableProjectDepsInPackageJson": false
           },
           "configurations": {
             "production": {

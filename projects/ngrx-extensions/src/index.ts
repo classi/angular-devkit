@@ -1,1 +1,1 @@
-export * from './lib/ngrx-extensions.module';
+export * from './lib/utils/create-feature-store-selector';

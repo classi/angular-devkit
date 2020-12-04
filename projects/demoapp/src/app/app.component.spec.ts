@@ -1,8 +1,8 @@
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { AppComponent } from './app.component';
 import { RouterTestingModule } from '@angular/router/testing';
-import { GoogleAnalyticsComponent } from './google-analytics/google-analytics.component';
 import { GoogleAnalyticsModule } from '@classi/ngx-google-analytics';
+import { AppComponent } from './app.component';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
@@ -11,7 +11,8 @@ describe('AppComponent', () => {
         RouterTestingModule,
         GoogleAnalyticsModule.forRoot({ disableTracking: true }),
       ],
-      declarations: [AppComponent, GoogleAnalyticsComponent],
+      declarations: [AppComponent],
+      schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
   });
 
