@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideMockStore } from '@ngrx/store/testing';
 import * as counterStore from './counter-store';
+import counterSlice from './counter-slice';
 import { NgrxStoreComponent } from './ngrx-store.component';
 
 describe('NgrxStoreComponent', () => {
@@ -14,6 +15,7 @@ describe('NgrxStoreComponent', () => {
         provideMockStore({
           initialState: {
             [counterStore.featureName]: counterStore.initialState,
+            [counterSlice.name]: counterSlice.initialState,
           },
         }),
       ],

@@ -1,10 +1,10 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { StoreModule } from '@ngrx/store';
-import { GoogleAnalyticsModule } from '@classi/ngx-google-analytics';
-
-import { AppComponent } from './app.component';
+import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
+import { GoogleAnalyticsModule } from '@classi/ngx-google-analytics';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { AppComponent } from './app.component';
 import { GoogleAnalyticsComponent } from './google-analytics/google-analytics.component';
 import { NgrxStoreModule } from './ngrx-store/ngrx-store.module';
 
@@ -21,6 +21,7 @@ import { NgrxStoreModule } from './ngrx-store/ngrx-store.module';
     RouterModule.forRoot([], { initialNavigation: 'enabled' }),
     GoogleAnalyticsModule.forRoot({}),
     StoreModule.forRoot([]),
+    StoreDevtoolsModule.instrument({}),
     NgrxStoreModule,
   ],
   providers: [],
