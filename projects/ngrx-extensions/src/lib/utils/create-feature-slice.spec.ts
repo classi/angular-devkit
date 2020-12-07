@@ -1,5 +1,5 @@
-import { TestBed, waitForAsync } from '@angular/core/testing';
-import { getMockStore, MockStore, provideMockStore } from '@ngrx/store/testing';
+import { waitForAsync } from '@angular/core/testing';
+import { getMockStore } from '@ngrx/store/testing';
 import { createFeatureSlice } from './create-feature-slice';
 
 describe('createFeatureSlice', () => {
