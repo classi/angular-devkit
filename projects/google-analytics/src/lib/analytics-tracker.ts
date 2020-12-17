@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { filter } from 'rxjs/operators';
 import { AnalyticsTrackerConfig, defaultConfig } from './config';
-import { GoogleAnalyticsAdapter } from './ga';
+import { TrackingEngine } from './engine/types';
 import { EventTracking } from './tracking/event-tracking';
 import { PageTracking } from './tracking/page-tracking';
 import { UserTimingTracking } from './tracking/user-timing-tracking';
-import { CustomEventTrack, UserTimingTrack } from './types';
+import { EventTrack, UserTimingTrack } from './types';
 
 @Injectable()
 export class AnalyticsTracker {
@@ -16,7 +16,7 @@ export class AnalyticsTracker {
     private readonly pageTracking: PageTracking,
     private readonly eventTracking: EventTracking,
     private readonly userTimingTracking: UserTimingTracking,
-    private readonly gaAdapter: GoogleAnalyticsAdapter
+    private readonly engine: TrackingEngine
   ) {
     this.config = { ...defaultConfig, ...config };
   }
@@ -25,37 +25,37 @@ export class AnalyticsTracker {
     this.pageTracking.pageChange$
       .pipe(filter(() => !this.config.disableTracking))
       .subscribe(({ url }) => {
-        this.gaAdapter.sendPageView(url);
+        this.engine.sendPageView(url);
       });
     this.eventTracking.events$
       .pipe(filter(() => !this.config.disableTracking))
       .subscribe((event) => {
-        this.gaAdapter.sendEvent(event);
+        this.engine.sendEvent(event);
       });
     this.userTimingTracking.userTiming$
       .pipe(filter(() => !this.config.disableTracking))
       .subscribe((timing) => {
-        this.gaAdapter.sendUserTiming(timing);
+        this.engine.sendUserTiming(timing);
       });
   }
 
-  captureCustomEvent(event: CustomEventTrack): void {
+  sendEvent(event: EventTrack): void {
     this.eventTracking.push(event);
   }
 
-  captureUserTiming(timing: UserTimingTrack): void {
+  sendUserTiming(timing: UserTimingTrack): void {
     this.userTimingTracking.push(timing);
   }
 
   setUserContext(user: { id: string }): void {
-    this.gaAdapter.setUserId(user.id);
+    this.engine.setUserContext(user);
   }
 
   clearUserContext(): void {
-    this.gaAdapter.setUserId(null);
+    this.engine.clearUserContext();
   }
 
   setCustomDimensions(dimensions: Record<string, string>): void {
-    this.gaAdapter.setCustomDimensions(dimensions);
+    this.engine.setCustomDimensions(dimensions);
   }
 }

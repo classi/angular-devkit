@@ -2,16 +2,30 @@ export type PageTrack = {
   url: string;
 };
 
+export type EventBaseParams = Gtag.ControlParams &
+  Gtag.CustomParams & {
+    event_category?: string;
+    event_label?: string;
+    value?: number;
+  };
+
+export type EventTrack = PredefinedEventTrack | CustomEventTrack;
+export type PredefinedEventTrack = {
+  name: Gtag.EventNames;
+  params?: EventBaseParams & Gtag.EventParams;
+};
 export type CustomEventTrack = {
-  category: string;
-  action: string;
-  label?: string;
-  value?: number;
+  name: string;
+  params?: EventBaseParams;
 };
 
 export type UserTimingTrack = {
-  category: string;
   name: string;
-  value: number;
-  label?: string;
+  params: EventBaseParams & {
+    value: number;
+  };
+};
+
+export type UserContext = {
+  id: string;
 };

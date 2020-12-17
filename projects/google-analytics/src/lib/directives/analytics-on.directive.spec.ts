@@ -2,6 +2,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { GoogleAnalyticsModule } from '../google-analytics.module';
 import { EventTracking } from '../tracking/event-tracking';
+import { EventTrack } from '../types';
 
 describe('AnalyticsOnDirective', () => {
   let fixture: ComponentFixture<TestComponent>;
@@ -34,7 +35,7 @@ describe('AnalyticsOnDirective', () => {
 
     component.button.nativeElement.click();
 
-    expect(tracking.push).toBeCalledWith({ category: 'test', action: 'click' });
+    expect(tracking.push).toBeCalledWith(component.clickEvent);
   });
 
   test('should track an event with passed field on change', () => {
@@ -43,10 +44,7 @@ describe('AnalyticsOnDirective', () => {
 
     component.input.nativeElement.dispatchEvent(new Event('change'));
 
-    expect(tracking.push).toBeCalledWith({
-      category: 'test',
-      action: 'change',
-    });
+    expect(tracking.push).toBeCalledWith(component.changeEvent);
   });
 
   describe('invalid inputs', () => {
@@ -69,13 +67,9 @@ describe('AnalyticsOnDirective', () => {
     <button
       #button
       [clAnalyticsOn]="'click'"
-      [analyticsEvent]="{ category: 'test', action: 'click' }"
+      [analyticsEvent]="clickEvent"
     ></button>
-    <input
-      #input
-      [clAnalyticsOn]="'change'"
-      [analyticsEvent]="{ category: 'test', action: 'change' }"
-    />
+    <input #input [clAnalyticsOn]="'change'" [analyticsEvent]="changeEvent" />
   `,
 })
 class TestComponent {
@@ -84,18 +78,28 @@ class TestComponent {
 
   @ViewChild('input', { static: true })
   input!: ElementRef<HTMLInputElement>;
+
+  clickEvent: EventTrack = {
+    name: 'click',
+    params: { event_category: 'test' },
+  };
+  changeEvent: EventTrack = {
+    name: 'change',
+    params: { event_category: 'test' },
+  };
 }
 
 @Component({
   template: `
-    <button
-      #button
-      clAnalyticsOn
-      [analyticsEvent]="{ category: 'test', action: 'click' }"
-    ></button>
+    <button #button clAnalyticsOn [analyticsEvent]="clickEvent"></button>
   `,
 })
-class WithoutEventNameComponent {}
+class WithoutEventNameComponent {
+  clickEvent: EventTrack = {
+    name: 'click',
+    params: { event_category: 'test' },
+  };
+}
 
 @Component({
   template: ` <button #button clAnalyticsOn="click"></button> `,

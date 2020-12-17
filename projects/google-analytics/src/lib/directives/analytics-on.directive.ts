@@ -2,7 +2,7 @@ import { Directive, ElementRef, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subject, fromEvent } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { EventTracking } from '../tracking/event-tracking';
-import { CustomEventTrack } from '../types';
+import { EventTrack } from '../types';
 
 @Directive({
   selector: '[clAnalyticsOn]',
@@ -14,7 +14,7 @@ export class AnalyticsOnDirective implements OnInit, OnDestroy {
   ) {}
 
   @Input('clAnalyticsOn') eventName!: string;
-  @Input('analyticsEvent') eventFields!: CustomEventTrack;
+  @Input('analyticsEvent') eventFields!: EventTrack;
 
   private readonly onDestroy$ = new Subject();
 

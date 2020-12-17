@@ -6,7 +6,7 @@
     "declaration": true,
     "declarationMap": true,
     "inlineSources": true,
-    "types": ["google.analytics"],
+    "types": ["gtag.js"],
     "lib": ["dom", "es2018"]
   },
   "angularCompilerOptions": {

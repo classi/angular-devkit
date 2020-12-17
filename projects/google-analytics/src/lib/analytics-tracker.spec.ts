@@ -2,13 +2,13 @@ import { Location } from '@angular/common';
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AnalyticsTracker } from './analytics-tracker';
-import { GoogleAnalyticsAdapter } from './ga';
+import { TrackingEngine } from './engine/types';
 import { GoogleAnalyticsModule } from './google-analytics.module';
-import { CustomEventTrack, UserTimingTrack } from './types';
+import { EventTrack, UserTimingTrack } from './types';
 
 describe('AnalyticsTracker', () => {
   let service: AnalyticsTracker;
-  let gaAdapter: GoogleAnalyticsAdapter;
+  let engine: TrackingEngine;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -16,7 +16,7 @@ describe('AnalyticsTracker', () => {
       providers: [],
     });
     service = TestBed.inject(AnalyticsTracker);
-    gaAdapter = TestBed.inject(GoogleAnalyticsAdapter);
+    engine = TestBed.inject(TrackingEngine);
   });
 
   it('should create an instance', () => {
@@ -25,72 +25,76 @@ describe('AnalyticsTracker', () => {
 
   it('should track page change event', () => {
     const loc = TestBed.inject(Location);
-    jest.spyOn(gaAdapter, 'sendPageView');
+    jest.spyOn(engine, 'sendPageView');
 
     service.startTracking();
     loc.go('/foobar');
 
-    expect(gaAdapter.sendPageView).toBeCalledWith('/foobar');
+    expect(engine.sendPageView).toBeCalledWith('/foobar');
   });
 
   it('should track custom event', () => {
-    jest.spyOn(gaAdapter, 'sendEvent');
+    jest.spyOn(engine, 'sendEvent');
 
     service.startTracking();
 
-    const event: CustomEventTrack = {
-      category: 'test',
-      action: 'click',
-      label: 'test clicked',
+    const event: EventTrack = {
+      name: 'click',
+      params: {
+        event_category: 'test',
+        event_label: 'test clicked',
+      },
     };
 
-    service.captureCustomEvent(event);
+    service.sendEvent(event);
 
-    expect(gaAdapter.sendEvent).toBeCalledWith(event);
+    expect(engine.sendEvent).toBeCalledWith(event);
   });
 
   it('should track user-timing', () => {
-    jest.spyOn(gaAdapter, 'sendUserTiming');
+    jest.spyOn(engine, 'sendUserTiming');
 
     service.startTracking();
 
     const timing: UserTimingTrack = {
-      category: 'test',
       name: 'click',
-      value: 100,
-      label: 'test timing',
+      params: {
+        event_category: 'test',
+        event_label: 'test timing',
+        value: 100,
+      },
     };
 
-    service.captureUserTiming(timing);
+    service.sendUserTiming(timing);
 
-    expect(gaAdapter.sendUserTiming).toBeCalledWith(timing);
+    expect(engine.sendUserTiming).toBeCalledWith(timing);
   });
 
   it('should be able to set user context', () => {
-    jest.spyOn(gaAdapter, 'setUserId');
+    jest.spyOn(engine, 'setUserContext');
 
     service.setUserContext({ id: 'test' });
 
-    expect(gaAdapter.setUserId).toBeCalledWith('test');
+    expect(engine.setUserContext).toBeCalledWith({ id: 'test' });
   });
 
   it('should be able to clear user context', () => {
-    jest.spyOn(gaAdapter, 'setUserId');
+    jest.spyOn(engine, 'clearUserContext');
 
     service.clearUserContext();
 
-    expect(gaAdapter.setUserId).toBeCalledWith(null);
+    expect(engine.clearUserContext).toBeCalled();
   });
 
   it('should be able to set custom dimensions', () => {
-    jest.spyOn(gaAdapter, 'setCustomDimensions');
+    jest.spyOn(engine, 'setCustomDimensions');
 
     service.setCustomDimensions({
       dimension1: 'value1',
       dimension2: 'value2',
     });
 
-    expect(gaAdapter.setCustomDimensions).toBeCalledWith({
+    expect(engine.setCustomDimensions).toBeCalledWith({
       dimension1: 'value1',
       dimension2: 'value2',
     });

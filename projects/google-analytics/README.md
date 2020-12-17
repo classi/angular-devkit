@@ -1,6 +1,6 @@
 # google-analytics
 
-A bridge package between Angular application and Google Analytics API.
+A bridge package between Angular application and Google Analytics API (`gtag.js`).
 
 ## Features
 
@@ -18,6 +18,28 @@ yarn add @classi/ngx-google-analytics
 ## Usage
 
 ### Setup
+
+#### 0. Install gtag.js
+
+ngx-google-analytics depends on `window.gtag` variable.
+Setup gtag.js following offitial guide: https://developers.google.com/analytics/devguides/collection/gtagjs
+
+```html
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script
+  async
+  src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"
+></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag('js', new Date());
+
+  gtag('config', 'GA_MEASUREMENT_ID');
+</script>
+```
 
 #### 1. Install `GoogleAnalyticsModule` into root NgModule.
 
@@ -46,10 +68,6 @@ export class AppComponent {
   }
 }
 ```
-
-**Notes**
-
-- If `window['ga']` global object doesn't exist, `GoogleAnalyticsModule` will do nothing.
 
 ### `AnalyticsTracker`
 
@@ -84,7 +102,7 @@ export class AppComponent {
 }
 ```
 
-#### Send custom events: `captureCustomEvent(eventFields)`
+#### Send events: `sendEvent(event)`
 
 ```ts
 export class AppComponent {
@@ -93,17 +111,20 @@ export class AppComponent {
   }
 
   sendCustomEvent() {
-    this.analytics.captureCustomEvent({
-      category: 'test', // * required
-      action: 'click', // * required
-      label: 'foobar', //   optional
-      value: 100, //   optional
+    this.analytics.sendEvent({
+      name: 'click',
+      // optional
+      params: {
+        event_category: 'test',
+        event_label: 'foobar',
+        value: 100,
+      },
     });
   }
 }
 ```
 
-#### Send user timing: `captureUserTiming(eventFields)`
+#### Send user timing: `sendUserTiming(eventFields)`
 
 ```ts
 export class AppComponent {
@@ -115,11 +136,13 @@ export class AppComponent {
     const before = window.performance.now();
     doSomething().then(() => {
       const after = window.performance.now();
-      this.analytics.captureUserTiming({
-        category: 'test',                   // * required
-        name: 'something',                  // * required
-        value: Month.round(after - before), // * required
-        label: 'foobar',                    //   optional
+      this.analytics.sendUserTiming({
+        name: 'something',
+        params: {
+          value: Month.round(after - before), // * required
+          event_category: 'test',
+          event_label: 'foobar',
+        },
       });
     });
   }
@@ -139,16 +162,11 @@ export class SomeModule {}
 ```
 
 ```html
-<button
-  clAnalyticsOn="click"
-  [analyticsEvent]="{ category: 'demoapp', action: 'buy' }"
->
-  Buy
-</button>
+<button clAnalyticsOn="click" [analyticsEvent]="clickEvent">Buy</button>
 ```
 
 - `clAnalyticsOn="{{eventName}}"`: Set a DOM event to track.
-- `[analyticsEvent]="eventFields"`: Set event fields.
+- `[analyticsEvent]="event"`: Set event fields. See details in `sendEvent` document.
 
 ## Development
 

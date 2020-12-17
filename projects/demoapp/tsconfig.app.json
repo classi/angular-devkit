@@ -2,7 +2,7 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "../../dist/out-tsc",
-    "types": ["google.analytics"]
+    "types": ["gtag.js"]
   },
   "files": ["src/main.ts", "src/polyfills.ts"]
 }

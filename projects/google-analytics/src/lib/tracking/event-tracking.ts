@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Observable, ReplaySubject } from 'rxjs';
-import { CustomEventTrack } from '../types';
+import { EventTrack } from '../types';
 
 @Injectable()
 export class EventTracking {
-  private readonly eventsSubject = new ReplaySubject<CustomEventTrack>(1);
+  private readonly eventsSubject = new ReplaySubject<EventTrack>(1);
 
-  get events$(): Observable<CustomEventTrack> {
+  get events$(): Observable<EventTrack> {
     return this.eventsSubject.asObservable();
   }
 
-  push(event: CustomEventTrack): void {
+  push(event: EventTrack): void {
     this.eventsSubject.next(event);
   }
 }

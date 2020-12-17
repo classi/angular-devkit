@@ -1,7 +1,7 @@
 export abstract class AnalyticsTrackerConfig {
-  abstract disableTracking: boolean;
+  abstract disableTracking?: boolean;
 }
 
-export const defaultConfig: AnalyticsTrackerConfig = {
+export const defaultConfig: Partial<AnalyticsTrackerConfig> = {
   disableTracking: false,
 };

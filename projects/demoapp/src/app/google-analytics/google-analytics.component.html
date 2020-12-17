@@ -5,9 +5,8 @@
 <button
   [clAnalyticsOn]="'click'"
   [analyticsEvent]="{
-    category: 'demoapp',
-    action: 'click',
-    label: 'by directive'
+    name: 'click',
+    params: { event_category: 'demoapp', event_label: 'by directive' }
   }"
 >
   send event by directive

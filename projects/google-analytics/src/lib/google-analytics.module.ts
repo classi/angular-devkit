@@ -1,16 +1,11 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { AnalyticsTracker } from './analytics-tracker';
 import { AnalyticsTrackerConfig } from './config';
-import { GoogleAnalyticsAdapter } from './ga';
+import { AnalyticsOnDirective } from './directives/analytics-on.directive';
+import { TrackingEngine, GtagEngine, GTAG_REF } from './engine';
 import { EventTracking } from './tracking/event-tracking';
 import { PageTracking } from './tracking/page-tracking';
 import { UserTimingTracking } from './tracking/user-timing-tracking';
-import { AnalyticsOnDirective } from './directives/analytics-on.directive';
-
-export function createAdapter(): GoogleAnalyticsAdapter {
-  const gaInstance = typeof window['ga'] !== 'undefined' ? ga : null;
-  return new GoogleAnalyticsAdapter(gaInstance);
-}
 
 @NgModule({
   declarations: [AnalyticsOnDirective],
@@ -28,8 +23,13 @@ export class GoogleAnalyticsModule {
           useValue: config,
         },
         {
-          provide: GoogleAnalyticsAdapter,
-          useFactory: createAdapter,
+          provide: GTAG_REF,
+          useValue: typeof window['gtag'] !== 'undefined' ? gtag : null,
+        },
+        GtagEngine,
+        {
+          provide: TrackingEngine,
+          useExisting: GtagEngine,
         },
         PageTracking,
         EventTracking,
