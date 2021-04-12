@@ -58,7 +58,7 @@
     "@nrwl/tao": "11.2.10",
     "@nrwl/workspace": "11.2.10",
     "@types/google.analytics": "^0.0.40",
-    "@types/gtag.js": "^0.0.3",
+    "@types/gtag.js": "0.0.4",
     "@types/jest": "26.0.8",
     "@types/node": "12.12.38",
     "@typescript-eslint/eslint-plugin": "4.3.0",

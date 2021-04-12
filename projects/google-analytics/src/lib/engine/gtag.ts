@@ -66,4 +66,10 @@ export class GtagEngine implements TrackingEngine {
       });
     }
   }
+
+  setUserProperties(value: Record<string, string>): void {
+    if (this.gtagRef) {
+      this.gtagRef('set', 'user_properties', value);
+    }
+  }
 }

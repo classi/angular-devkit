@@ -4,7 +4,7 @@
   "peerDependencies": {
     "@angular/common": ">= 11.0.0",
     "@angular/core": ">= 11.0.0",
-    "@types/gtag.js": "^0.0.3",
+    "@types/gtag.js": "^0.0.4",
     "rxjs": "^6.5.5"
   },
   "dependencies": {
