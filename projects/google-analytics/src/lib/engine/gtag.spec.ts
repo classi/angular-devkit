@@ -111,5 +111,19 @@ describe('GtagEngine', () => {
         dimension2: 'value2',
       });
     });
+
+    test('is able to set user properties', () => {
+      engine.setUserProperties({
+        favorite_composer: 'Mahler',
+        favorite_instrument: 'double bass',
+        season_ticketholder: 'true',
+      });
+
+      expect(gtagRef).toHaveBeenNthCalledWith(1, 'set', 'user_properties', {
+        favorite_composer: 'Mahler',
+        favorite_instrument: 'double bass',
+        season_ticketholder: 'true',
+      });
+    });
   });
 });

@@ -99,4 +99,20 @@ describe('AnalyticsTracker', () => {
       dimension2: 'value2',
     });
   });
+
+  it('should be able to set user properties', () => {
+    jest.spyOn(engine, 'setUserProperties');
+
+    service.setUserProperties({
+      favorite_composer: 'Mahler',
+      favorite_instrument: 'double bass',
+      season_ticketholder: 'true',
+    });
+
+    expect(engine.setUserProperties).toBeCalledWith({
+      favorite_composer: 'Mahler',
+      favorite_instrument: 'double bass',
+      season_ticketholder: 'true',
+    });
+  });
 });

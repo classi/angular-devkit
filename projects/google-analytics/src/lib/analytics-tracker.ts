@@ -58,4 +58,8 @@ export class AnalyticsTracker {
   setCustomDimensions(dimensions: Record<string, string>): void {
     this.engine.setCustomDimensions(dimensions);
   }
+
+  setUserProperties(value: Record<string, string>): void {
+    this.engine.setUserProperties(value);
+  }
 }

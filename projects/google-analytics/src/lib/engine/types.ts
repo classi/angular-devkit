@@ -7,4 +7,5 @@ export abstract class TrackingEngine {
   abstract sendEvent(event: EventTrack): void;
   abstract sendUserTiming(userTiming: UserTimingTrack): void;
   abstract setCustomDimensions(dimensions: Record<string, string>): void;
+  abstract setUserProperties(value: Record<string, string>): void;
 }
