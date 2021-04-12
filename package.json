@@ -69,7 +69,7 @@
     "eslint": "7.14.0",
     "eslint-config-prettier": "6.15.0",
     "jest": "26.2.2",
-    "jest-preset-angular": "8.3.2",
+    "jest-preset-angular": "8.4.0",
     "ng-packagr": "10.1.2",
     "prettier": "2.2.1",
     "standard-version": "9.0.0",
