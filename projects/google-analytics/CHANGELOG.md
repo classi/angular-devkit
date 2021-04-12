@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.2](https://github.com/classi/angular-devkit/compare/google-analytics-v0.1.1...google-analytics-v0.1.2) (2021-04-12)
+
+
+### Features
+
+* **google-analytics:** add setUserProperties ([#19](https://github.com/classi/angular-devkit/issues/19)) ([63bc437](https://github.com/classi/angular-devkit/commit/63bc4379a7a0c6a42476322c558e1a59c6524346))
+
 ### [0.1.1](https://github.com/classi/angular-devkit/compare/google-analytics-v0.1.0...google-analytics-v0.1.1) (2021-02-08)
 
 
