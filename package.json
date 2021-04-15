@@ -41,7 +41,7 @@
     "@angular/platform-browser-dynamic": "11.2.10",
     "@angular/router": "11.2.10",
     "@ngrx/store": "11.0.0",
-    "@reduxjs/toolkit": "1.5.0",
+    "@reduxjs/toolkit": "1.5.1",
     "rxjs": "6.5.5",
     "tslib": "2.0.3",
     "zone.js": "0.10.3"
