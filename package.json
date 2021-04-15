@@ -42,7 +42,7 @@
     "@angular/router": "11.2.10",
     "@ngrx/store": "11.1.0",
     "@reduxjs/toolkit": "1.5.1",
-    "rxjs": "6.5.5",
+    "rxjs": "6.6.7",
     "tslib": "2.2.0",
     "zone.js": "0.10.3"
   },
