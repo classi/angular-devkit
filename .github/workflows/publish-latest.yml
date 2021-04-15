@@ -17,7 +17,7 @@ jobs:
         id: targetTag
       - run: echo "targetTag:${{steps.targetTag.outputs.result}}"
       # == endregion
-      - uses: actions/setup-node@v1
+      - uses: actions/setup-node@v2
         with:
           node-version: 12.x
           registry-url: 'https://registry.npmjs.org'
