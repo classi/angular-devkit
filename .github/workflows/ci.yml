@@ -29,6 +29,7 @@ jobs:
       - run: yarn
       - run: yarn affected:test --base=remotes/origin/main
       - run: yarn affected:lint --base=remotes/origin/main
+      - run: yarn format:check --base=remotes/origin/main
 
   demoapp-build:
     runs-on: ubuntu-latest
