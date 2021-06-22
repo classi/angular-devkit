@@ -25,7 +25,7 @@ See details in [counter-slice.ts](/projects/demoapp/src/app/ngrx-store/counter-s
 
 ```ts
 // counter-slice.ts
-import { createFeatureSlice } from '@classi/ngrx-extensions';
+import { createFeatureSlice, PayloadAction } from '@classi/ngrx-extensions';
 
 export type State = {
   count: number;
@@ -39,7 +39,11 @@ export default createFeatureSlice({
   name: 'counter',
   initialState,
   reducers: {
-    increment: (state) => ({ count: state.count + 1 }),
+    increment: () => ({ ...state, count: state.count + 1 }),
+    set: (state, action: PayloadAction<number>) => ({
+      ...state,
+      count: action.payload,
+    }),
     reset: () => ({ count: 0 }),
   },
 });
@@ -47,7 +51,7 @@ export default createFeatureSlice({
 
 ```ts
 import { Store } from '@ngrx/store';
-import * as counterSlice from './counter-slice';
+import counterSlice from './counter-slice';
 
 @Component({})
 export class SomeComponent {
@@ -55,6 +59,18 @@ export class SomeComponent {
 
   // Retrieve a scoped state from the store
   readonly count$ = counterSlice.select(this.store, (state) => state.count);
+
+  increment() {
+    this.store.dispatch(counterSlice.actions.increment());
+  }
+
+  setCount(count: number) {
+    this.store.dispatch(counterSlice.actions.set(count));
+  }
+
+  reset() {
+    this.store.dispatch(counterSlice.actions.reset());
+  }
 }
 ```
 
