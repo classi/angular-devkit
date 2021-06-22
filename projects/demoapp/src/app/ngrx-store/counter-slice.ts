@@ -1,4 +1,4 @@
-import { createFeatureSlice } from '@classi/ngrx-extensions';
+import { createFeatureSlice, PayloadAction } from '@classi/ngrx-extensions';
 
 export type State = {
   count: number;
@@ -13,6 +13,7 @@ export default createFeatureSlice({
   initialState,
   reducers: {
     increment: (state) => ({ count: state.count + 1 }),
+    set: (state, action: PayloadAction<number>) => ({ count: action.payload }),
     reset: () => ({ count: 0 }),
   },
 });

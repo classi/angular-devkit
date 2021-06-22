@@ -1,5 +1,6 @@
 import { waitForAsync } from '@angular/core/testing';
 import { getMockStore } from '@ngrx/store/testing';
+import { PayloadAction } from './vendor-exports';
 import { createFeatureSlice } from './create-feature-slice';
 
 describe('createFeatureSlice', () => {
@@ -19,6 +20,23 @@ describe('createFeatureSlice', () => {
     expect(typeof slice.select === 'function').toBe(true);
     expect(typeof slice.reducer === 'function').toBe(true);
     expect(typeof slice.actions.change === 'function').toBe(true);
+  });
+
+  test('should genearte actions with payload', () => {
+    const slice = createFeatureSlice({
+      name: 'test',
+      initialState: {
+        foo: 'bar',
+      },
+      reducers: {
+        change: (state, action: PayloadAction<string>) => ({
+          ...state,
+          foo: action.payload,
+        }),
+      },
+    });
+    const action = slice.actions.change('update');
+    expect(action.payload).toBe('update');
   });
 
   test(
