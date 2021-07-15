@@ -120,19 +120,6 @@
           "options": {
             "command": "jest projects/google-analytics"
           }
-        },
-        "release": {
-          "builder": "@nrwl/workspace:run-commands",
-          "outputs": ["projects/google-analytics/CHANGELOG.md"],
-          "options": {
-            "commands": [
-              {
-                "command": "npx standard-version"
-              }
-            ],
-            "cwd": "projects/google-analytics",
-            "parallels": false
-          }
         }
       },
       "schematics": {
@@ -170,19 +157,6 @@
           "builder": "@nrwl/workspace:run-commands",
           "options": {
             "command": "jest projects/ngrx-extensions"
-          }
-        },
-        "release": {
-          "builder": "@nrwl/workspace:run-commands",
-          "outputs": ["projects/ngrx-extensions/CHANGELOG.md"],
-          "options": {
-            "commands": [
-              {
-                "command": "npx standard-version"
-              }
-            ],
-            "cwd": "projects/ngrx-extensions",
-            "parallels": false
           }
         }
       },
