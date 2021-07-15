@@ -8,10 +8,10 @@ import { AppComponent } from './app.component';
 import { GoogleAnalyticsComponent } from './google-analytics/google-analytics.component';
 import { NgrxStoreModule } from './ngrx-store/ngrx-store.module';
 
-// dummy `ga`
+// dummy `gtag`
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-(window as any)['ga'] = (...args: any[]) => {
-  console.log(`ga(${args.map((a) => JSON.stringify(a)).join(', ')})`);
+(window as any)['gtag'] = (...args: any[]) => {
+  console.log(`gtag(${args.map((a) => JSON.stringify(a)).join(', ')})`);
 };
 
 @NgModule({
