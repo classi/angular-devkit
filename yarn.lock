@@ -1732,17 +1732,17 @@
     merge-source-map "^1.1.0"
     schema-utils "^2.7.0"
 
-"@ngrx/store-devtools@11.1.1":
-  version "11.1.1"
-  resolved "https://registry.yarnpkg.com/@ngrx/store-devtools/-/store-devtools-11.1.1.tgz#bdefc5c03dcac6fc21fcc9e33a4a3a3464f3e2d6"
-  integrity sha512-YvTMy8HUMUiiyrzKn4KhrQzkAg2yBfLgd1PHR0yPjyzj7RCaYZHwhq6sP0+AiFMBi1Lat8Wczy7SwwLTa6aZ3w==
+"@ngrx/store-devtools@12.2.0":
+  version "12.2.0"
+  resolved "https://registry.yarnpkg.com/@ngrx/store-devtools/-/store-devtools-12.2.0.tgz#dc0a32458e0f69080d05e881ce03a9768b92c599"
+  integrity sha512-R8GBVk1zki/IRl022v2LRWEx1yCS4xQdP1mpK5sbfY+yuxDouY3wkgT02Wb225TJthm9DE6xJOaXu5maHqgUHg==
   dependencies:
     tslib "^2.0.0"
 
-"@ngrx/store@11.1.1":
-  version "11.1.1"
-  resolved "https://registry.yarnpkg.com/@ngrx/store/-/store-11.1.1.tgz#e971d767ae5caa8984daad23cda38c6fd94dc888"
-  integrity sha512-tkeKoyYo631hLJ1I8+bm9EWoi7E0A3i4IMjvf956Vpu5IdMnP6d0HW3lKU/ruhFD5YOXAHcUgEIWyfxxILABag==
+"@ngrx/store@12.2.0":
+  version "12.2.0"
+  resolved "https://registry.yarnpkg.com/@ngrx/store/-/store-12.2.0.tgz#3b413d95e1b311ea8598f6eaee3cc7ae890f8619"
+  integrity sha512-DV1Yu4VhuSV6OfeHFdKEhuQTcHTMkn0igT6V3/x/FpzJ8vaq7tAN78iALMydce+YX+FcdFgj3cr3URQfYfisMA==
   dependencies:
     tslib "^2.0.0"
 
