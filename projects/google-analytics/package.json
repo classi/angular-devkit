@@ -1,6 +1,6 @@
 {
   "name": "@classi/ngx-google-analytics",
-  "version": "0.1.2",
+  "version": "0.0.0-PLACEHOLDER",
   "peerDependencies": {
     "@angular/common": ">= 12.0.0",
     "@angular/core": ">= 12.0.0",
