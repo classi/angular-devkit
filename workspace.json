@@ -27,9 +27,9 @@
           }
         },
         "test": {
-          "builder": "@nrwl/jest:jest",
+          "builder": "@nrwl/workspace:run-commands",
           "options": {
-            "jestConfig": "projects/google-analytics/jest.config.js"
+            "command": "jest projects/google-analytics"
           }
         },
         "release": {
@@ -134,10 +134,9 @@
           }
         },
         "test": {
-          "builder": "@nrwl/jest:jest",
+          "builder": "@nrwl/workspace:run-commands",
           "options": {
-            "jestConfig": "projects/demoapp/jest.config.js",
-            "passWithNoTests": true
+            "command": "jest projects/demoapp"
           }
         }
       }
@@ -168,10 +167,9 @@
           }
         },
         "test": {
-          "builder": "@nrwl/jest:jest",
+          "builder": "@nrwl/workspace:run-commands",
           "options": {
-            "jestConfig": "projects/ngrx-extensions/jest.config.js",
-            "passWithNoTests": true
+            "command": "jest projects/ngrx-extensions"
           }
         },
         "release": {
