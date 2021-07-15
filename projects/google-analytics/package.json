@@ -2,8 +2,8 @@
   "name": "@classi/ngx-google-analytics",
   "version": "0.1.2",
   "peerDependencies": {
-    "@angular/common": ">= 11.0.0",
-    "@angular/core": ">= 11.0.0",
+    "@angular/common": ">= 12.0.0",
+    "@angular/core": ">= 12.0.0",
     "@types/gtag.js": "^0.0.4 || ^0.0.5 || ^0.0.6 || ^0.0.7",
     "rxjs": "^6.5.5"
   },
