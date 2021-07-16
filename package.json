@@ -41,7 +41,7 @@
     "@ngrx/store": "12.2.0",
     "@reduxjs/toolkit": "1.5.1",
     "rxjs": "6.6.7",
-    "tslib": "2.2.0",
+    "tslib": "2.3.0",
     "zone.js": "0.11.4"
   },
   "devDependencies": {
